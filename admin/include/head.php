@@ -18,10 +18,7 @@
   
   <!-- Jquery --->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
- <!-- Select2 -->
- <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
-
+  
 <!-- notiflix js  -->
 <script src="dist/js/notiflix-2.7.0.min.js" ></script>
 <script src="dist/js/notiflix-aio-2.7.0.min.js" ></script>
