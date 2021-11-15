@@ -243,39 +243,26 @@ nav[data-state=open] ul li:nth-child(4) {
 
 </head>
 <body>
-   <div class="room" > <?php echo $name ?></div> 
+   <div class="room" > <h3><?php echo $name ?> - Kitchen</h3></div> 
 <!-- partial:index.partial.html -->
-<div class="hamburger-menu">
-  <button class="burger" data-state="closed">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-</div>
-<nav data-state="closed">
-  <ul>
-  <li>
-    <a href="trackorder.php"  style="color:white">Home</a>
-  </li>
-</ul>
-</nav>
+
+
 <main>
 
   
   <div class="container">
-    <div class="room" ><i class='fa fa-home'></i>Cook Name: </div> 
     
 
 
   <?php 
 	$i = 0;
-$course = $conn->query("SELECT * FROM `order_details` WHERE  `paid`='0' ");
+$course = $conn->query("SELECT * FROM `order_details` WHERE  `paid`='0' ORDER BY `id` DESC");
 while($row=$course->fetch_assoc()):
 $i++;
 	?>
     
     
-<div>Order ID :  <?php echo $i ?>  <span class="badge badge1  badge-success" data-id="<?php echo $row['id'] ?>"  > View Order</span> </div> 
+<div>Order ID :  <?php echo $row['id'] ?> | Room No : <?php echo $row['roomno'] ?>  <span class="badge badge1  badge-success" data-id="<?php echo $row['id'] ?>"  > View Ordered Items</span> </div> 
     <div class="row">
 
         <div class="align-self-center col-md-12 hh-grayBox ">
@@ -289,19 +276,19 @@ $i++;
 
                     switch($order_status){
                         case '0':
-                            echo '<span class="badge badge-dark " style="font-size: 3.1em;">Pending</span>';
+                            echo '<span class="badge badge-dark " style="font-size: 2.1em;">Pending</span>';
 	                    break;
                         case '1':
-                            echo '<span class="badge badge-primary" style="font-size: 3.1em;">Packed</span>';
+                            echo '<span class="badge badge-primary" style="font-size: 2.1em;">Packed</span>';
 	                    break;
                         case '2':
-                            echo '<span class="badge badge-warning" style="font-size: 3.1em;">Approved</span>';
+                            echo '<span class="badge badge-warning" style="font-size: 2.1em;">Approved</span>';
 	                    break;
                         case '3':
-                            echo '<span class="badge badge-success" style="font-size: 3.1em;">Delivered</span>';
+                            echo '<span class="badge badge-success" style="font-size: 2.1em;">Delivered</span>';
 	                    break;
                         default:
-                            echo '<span class="badge badge-danger" style="font-size: 3.1em;">Cancelled</span>';
+                            echo '<span class="badge badge-danger" style="font-size: 2.1em;">Cancelled</span>';
 	                    break;
                     }
                 ?>
@@ -380,7 +367,7 @@ $('.badge1').on('touchstart', function(e) {
         var self = this;
         this.setContentPrepend('<div>all ordering item</div>');
         setTimeout(function () {
-            self.setContentAppend('<div>Thanks For Your Order</div>');
+            self.setContentAppend('<div></div>');
         }, 2000);
     },
     columnClass: 'medium',

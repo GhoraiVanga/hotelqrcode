@@ -9,7 +9,7 @@
          </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="example1" class="table table-bordered table-striped dataTable">
                   <thead>
                   <tr>
                     <th>Room No</th>
@@ -39,7 +39,7 @@
                                 <?php endif; ?>
                             </td>
                <td class="text-center">
-				<button class="btn btn-sm btn-outline-primary edit_category" type="button" data-id="<?php echo $row['roomno'] ?>" >Show Invoice</button>
+				<button class="btn btn-sm btn-outline-primary edit_category" type="button" data-id="<?php echo $row['roomno'] ?>" >Action</button>
 				
 				</td>
               
@@ -65,7 +65,8 @@
 	})
 
 
-	$('.edit_category').click(function(){
+//	$('.edit_category').click(function(){
+$(".dataTable").on('click','.edit_category', function () { 
 		uni_modal("Manage Invoice","generate_invoice.php?id="+$(this).attr('data-id'),'large')
 		
 	})

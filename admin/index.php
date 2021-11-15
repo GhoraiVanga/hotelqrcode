@@ -32,8 +32,8 @@ session_start(); ?>
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index.php?page=home" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Qrcode Admin</span>
+      <img src="dist/img/hotel.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">SMART HOTEL</span>
     </a>
 
     <!-- Sidebar -->
@@ -91,6 +91,7 @@ session_start(); ?>
       <div class="modal-content">
         <div class="modal-header">
         <h5 class="modal-title"></h5>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="far fa-window-close"></i></button>
       </div>
       <div class="modal-body">
       </div>
@@ -162,9 +163,9 @@ session_start(); ?>
 <!-- Pop Up ---->
 <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.1.0
+     
     </div>
-    <strong>Copyright &copy; 22021-2022 <a href="https://wekart.co.in/">Wekart Incorporation</a>.</strong> All rights reserved.
+   <center> <strong>Copyright &copy; 2021-2022 <a href="https://wekart.co.in/">WeKart Incorporation</a>.</strong></center>
   </footer>
 
   <!-- Control Sidebar -->
@@ -362,8 +363,8 @@ function playSound()
    //audioogg.play();
   // audioogg.muted = true; // without this line it's not working although I have "muted" in HTML
    audioogg.play();
-   Notiflix.Report.Success( 'New Order', 'You Have a New Order', 'Click',  function cb() {
-	location.reload();
+   Notiflix.Report.Success( 'New Order', 'You Have a New Order', 'View Order',  function cb() {
+	window.location ="index.php?page=order"
     
   } ); 
 

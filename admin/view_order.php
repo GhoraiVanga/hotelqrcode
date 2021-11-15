@@ -15,8 +15,9 @@ if(isset($_GET['id'])){
 <div class="card card-outline card-primary">
     <div class="card-body">
         <div class="conitaner-fluid">
-            <p><b>Client Name: <?php echo $name ?></b></p>
-            <p><b>Delivery Romm Address: <?php echo $roomno ?></b></p>
+            <p><b>Guest Name : <?php echo $name ?></b></p>
+            <p><b>Room No. : <?php echo $roomno ?></b></p>
+            <p><b>Message : <?php echo $message ?></b></p>
             <table class="table-striped table table-bordered">
                 <colgroup>
                    
@@ -59,7 +60,6 @@ if(isset($_GET['id'])){
         </div>
         <div class="row">
             <div class="col-6">
-                <p>Payment Method: <?php echo  "Not Available " ?></p>
                 <p>Payment Status: <?php echo $paid == 0 ? '<span class="badge badge-light">Unpaid</span>' : '<span class="badge badge-success">Paid</span>' ?></p>
                 
                 
@@ -67,7 +67,7 @@ if(isset($_GET['id'])){
                 
                 
                     <div>
-                    <button type="button" id="update_payment" class="btn btn-sm btn-flat btn-primary">Update payment</button>
+                    <button type="button" id="update_payment" class="btn btn-sm btn-flat btn-primary">Update Payment Status</button>
                 </div>
             </div>
             <div class="col-6 row row-cols-2">
@@ -96,7 +96,7 @@ if(isset($_GET['id'])){
                 <?php if(!isset($_GET['view'])): ?>
                 <div class="col-3"></div>
                 <div class="col">
-                    <button type="button" id="update_status" class="btn btn-sm btn-flat btn-primary">Update Status</button>
+                    <button type="button" id="update_status" class="btn btn-sm btn-flat btn-primary">Update Order Status</button>
                 </div>
                 <?php endif; ?>
                 
@@ -104,7 +104,9 @@ if(isset($_GET['id'])){
          
             
         </div>
-          <center> <a href="index.php?page=single_invoice&id=<?php echo $_GET['id'] ?>&roomno=<?php echo $roomno ?>"  rel="noopener"  class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+          <center> 
+          <a href="index.php?page=single_invoice&id=<?php echo $_GET['id'] ?>&roomno=<?php echo $roomno ?>"  rel="noopener"  class="btn btn-default"><i class="fas fa-print"></i> Print Invoice</a>
+            <a href="index.php?page=single_thermal_printer&id=<?php echo $_GET['id'] ?>"  rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Thermal  Printer </a> 
                 </center> 
     </div>
 </div>

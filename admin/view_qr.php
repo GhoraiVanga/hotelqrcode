@@ -19,9 +19,9 @@ foreach($qry->fetch_array() as $k => $val){
                 
                 <!-- /.user-block -->
                 <div class="card-tools">
-                  <button type="button" class="btn btn-tool" title="Mark as read">
+                  <!--<button type="button" class="btn btn-tool" title="Mark as read">
                     <i class="far fa-circle"></i>
-                  </button>
+                  </button>-->
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
                   </button>
@@ -36,8 +36,8 @@ foreach($qry->fetch_array() as $k => $val){
 	<div class="qr-field">
 				
 				<center>
-					<div class="qrframe" style="border:2px solid black; width:210px; height:220px;">
-							<?php echo '<img src="QRCODE/'. @$room.'.png" style="width:200px; height:200px;"><br>'; ?>
+					<div class="qrframe" style="border:2px solid black; width:410px; height:420px;">
+							<?php echo '<img src="QRCODE/'. @$room.'.png" style="width:400px; height:400px;"><br>'; ?>
 					</div>
 					<a class="btn btn-default submitBtn" style="width:210px; margin:5px 0;" href="download.php?file=<?php echo $room; ?>.png ">Download QR Code</a>
 				</center>

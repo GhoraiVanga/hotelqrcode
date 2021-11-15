@@ -16,10 +16,7 @@ $date=date('d-m-Y');
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-            <div class="callout callout-info">
-              <h5><i class="fas fa-info"></i> Note:</h5>
-              This page has been enhanced for printing. Click the print button at the bottom of the invoice to test.
-            </div>
+      
 
 
             <!-- Main content -->
@@ -42,15 +39,15 @@ $date=date('d-m-Y');
                     <strong><?php echo $name ?></strong><br>
                     <?php echo $tagline ?><br>
                     <?php echo $address ?><br>
-                    Phone: <?php echo $email ?><br>
-                    Email: <?php echo $phone?>
+                    Email: <?php echo $email ?><br>
+                    Phone: <?php echo $phone?>
                   </address>
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-4 invoice-col">
-                  To
+                  To : <strong><?php echo $_GET['id'] ?></strong><br>
                   <address>
-                    <strong><?php echo $_GET['id'] ?></strong><br>
+                    
                   <!--  795 Folsom Ave, Suite 600<br>
                     San Francisco, CA 94107<br>
                     Phone: (555) 539-1037<br>
@@ -59,11 +56,15 @@ $date=date('d-m-Y');
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-4 invoice-col">
-                  <b>Invoice <?php echo  "#IV12345"  ?></b><br>
+                  <b>Invoice : <?php
+                //  $length=5;
+//$min = pow(10, $length - 1) ;
+ // $max = pow(10, $length) - 1;
+//echo mt_rand($min, $max);   ?></b><br>
                   <br>
-                  <b>Order ID:</b>###<br>
-                  <b>Payment Due:</b> <?php echo date('d-m-Y H:i');  ?><br>
-                  <b>Account:</b> <?php echo $_GET['id']  ?>
+                  <b>Order Room No :</b><strong><?php echo $_GET['id'] ?></strong><br>
+                 <b>Payment Due:</b> UnPaid<br> 
+                  
                 </div>
                 <!-- /.col -->
               </div>
@@ -131,9 +132,7 @@ $date=date('d-m-Y');
                   <img src="dist/img/credit/paypal2.png" alt="Paypal">
 
                   <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem
-                    plugg
-                    dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
+        
                   </p>
                 </div>
                 <!-- /.col -->

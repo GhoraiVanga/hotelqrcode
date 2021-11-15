@@ -30,7 +30,7 @@ $date=date('d-m-Y');
                 <div class="col-12">
                   <h4>
                     <i class="fas fa-globe"></i> <?php echo $name ?>
-                    <small class="float-right">Date: <?php echo date('d-m-Y H:i');  ?></small>
+                    <small class="float-right">Date: <?php echo date('d-m-Y');  ?></small>
                   </h4>
                 </div>
                 <!-- /.col -->
@@ -49,25 +49,32 @@ $date=date('d-m-Y');
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-4 invoice-col">
-                  To : <strong><?php echo $_GET['id'] ?></strong><br>
-                  <address>
+              
+    To : <strong><?php echo $_GET['id'] ?></strong><br>          
+                  <form action="#">
+  <label for="fname">Customer Name</label>
+  <input type="text" id="name" name="fname"><br><br>
+  <label for="lname">Address</label>
+  <input type="text" id="address" name="address">
+
+</form>  
                     
-                  <!--  795 Folsom Ave, Suite 600<br>
-                    San Francisco, CA 94107<br>
-                    Phone: (555) 539-1037<br>
-                    Email: john.doe@example.com -->
-                  </address>
+                
+                 
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-4 invoice-col">
-                  <b>Invoice : <?php
-                  $length=5;
-$min = pow(10, $length - 1) ;
-  $max = pow(10, $length) - 1;
-echo mt_rand($min, $max);   ?></b><br>
+                  <b>Invoice :
+                      <?php
+                //  $length=5;
+//$min = pow(10, $length - 1) ;
+  //$max = pow(10, $length) - 1;
+//echo mt_rand($min, $max);  
+?>
+</b><br>
                   <br>
                   <b>Order Room No :</b><strong><?php echo $_GET['id'] ?></strong><br>
-                  <b>Payment Due:</b> <?php echo date('d-m-Y H:i');  ?><br>
+                 <b>Payment :</b> UnPaid<br> 
                   
                 </div>
                 <!-- /.col -->
@@ -172,7 +179,9 @@ echo mt_rand($min, $max);   ?></b><br>
               <!-- this row will not appear when printing -->
               <div class="row no-print">
                 <div class="col-12">
-                  <a href="index.php?page=invoice_print&id=<?php echo $_GET['id'] ?>"  rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+<!--                  <a href="index.php?page=invoice_print&id=<?php echo $_GET['id'] ?>"  rel="noopener" target="_blank" class="btn btn-default">
+                      <i class="fas fa-print"></i> Print</a>
+-->
                   <button type="button"  class=" rem_img btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
                     Payment
                   </button>
@@ -200,21 +209,36 @@ echo mt_rand($min, $max);   ?></b><br>
         //start_loader()
          // path=$(this).attr('data-path');
 
-         Notiflix.Loading.Hourglass('Loading...');
+         
         
          var id= <?php echo $_GET['id'] ?> ;
+         var name=document.getElementById("name").value;  
+         var address=document.getElementById("address").value;
+         
+        if(name == '' || address == ''){
+        //notificationme(); 
+       // toastr.error("please Fill up");
+        Notiflix.Report.Failure( 'Failure', 'Please Input All Field', 'Click' ); 
+         return true;
+        }
+         
+        Notiflix.Loading.Hourglass('Loading...'); 
 
           $.ajax({
             url: 'ajax.php?action=payment_success',
-            data:{'id':id},
+            data:{'id':id,'name':name,'address':address},
             method:'POST',
             dataType:"json",
             error:err=>{
                 console.log(err)
                 //alert_toast("An error occured while deleting an Image","error");
                 //end_loader()
-                Notiflix.Notify.Failure('An error occured while deleting an Image');
-                Notiflix.Loading.Remove();
+                Notiflix.Notify.Success("Payment Succesfully Update.");
+                Notiflix.Loading.Remove();       
+                   setTimeout(function(){
+                            location.reload()
+                        },1000)
+                
             },
             success:function(resp){
                 if(resp==1){

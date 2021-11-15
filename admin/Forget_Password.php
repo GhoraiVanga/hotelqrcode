@@ -12,8 +12,8 @@ session_start();
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title></title>
+  <title>QRCODE</title>
+ <link rel="icon" href="QRCODE/qrcode.gif" type="image/gif" sizes="16x16">
 <?php 
 if(isset($_SESSION['login_id']))
 header("location:index.php?page=home");
@@ -27,21 +27,29 @@ header("location:index.php?page=home");
 
 <head>
     <meta charset="utf-8">
-    <title>Forget Passowrd Page</title>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
 *{
-  margin: 0;
-  padding: 0;
+  
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
 body{
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(120deg,#2980b9, #8e44ad);
+
+ /* background: linear-gradient(120deg,#2980b9, #8e44ad); */
+  
+     background-image: url("bgimage/forget.jpg");
+background-repeat:no-repeat;
+-webkit-background-size:cover;
+-moz-background-size:cover;
+-o-background-size:cover;
+background-size:cover;
+background-position:center;
+ 
   height: 100vh;
   overflow: hidden;
+
 }
 .center{
   position: absolute;
@@ -151,16 +159,12 @@ input[type="submit"]:hover{
       <form  method="post" id="Forget-form">
           
         <div class="txt_field">
-          <input type="text" name="email"  id="email" >
+          <input type="text" name="email"  id="email"  >
           <span></span>
           <label>Email</label>
         </div>
         
-        <div class="txt_field">
-          <input type="password" name="password" id="password" >
-          <span></span>
-          <label>Password</label>
-        </div>
+
         
     <div class="pass"><a href="login.php">Login</a>  </div>
         <input type="submit" value="Submit">
@@ -190,20 +194,16 @@ input[type="submit"]:hover{
         e.preventDefault()
 
         var email = $('#email').val();
-        var password = $('#password').val();
-  
         
-        if(email == '' || password == '' ){
+       if(email == ''){
         //notificationme(); 
         //toastr.error("please Fill up");
 
-        Notiflix.Report.Failure( 'Failure', 'Please Input All Field', 'Click' ); 
+        Notiflix.Report.Failure( 'Failure', 'Please Type your Email', 'Click' ); 
      return false;
         }
         
-       
-        
-        //start_load()
+     //start_load()
         Notiflix.Loading.Dots('Processing...');
        $('#msg').html('')
         $.ajax({
@@ -217,13 +217,13 @@ input[type="submit"]:hover{
             success:function(resp){
                 if(resp==1){
                    // toastr.success("Data successfully saved.")
-                   Notiflix.Notify.Success("Data successfully changed.");
+                   Notiflix.Notify.Success("Please Check Your Email ");
 
                         setTimeout(function(){
                             location.reload()
                         },1000)
                 } else if(resp == 2){
-                    Notiflix.Report.Warning( 'Warning', 'Email Id Did Not Match', 'Click' );
+                    Notiflix.Report.Warning( 'Warning', 'Email Did Not Match', 'Click' );
                 //$('#msg').html('<div class="alert alert-danger mx-2">#food  already exist.</div>')
                 //end_load()
                 Notiflix.Loading.Remove();

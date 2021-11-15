@@ -27,7 +27,7 @@ foreach($qry->fetch_array() as $k => $val){
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Total Amount</title>
+  <title>Amount</title>
   <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
 
@@ -339,18 +339,17 @@ figure figcaption h2 {
 <nav data-state="closed">
   <ul>
   <li>
-    <a href="trackorder.php">Home</a>
-  </li>
+    <a href="scanme.php"  >Order Food</a>
+  </li> 
   <li>
-    <a href="totalamount.php" style="color:white" >Total Amount</a>
+    <a href="trackorder.php"  >Track Order</a>
   </li>
 
+<!--  <li>
+    <a href="totalamount.php" style="color:white">Order Amount</a>
+  </li>     -->
   <li>
-    <a href="contact.php">Contact Us</a>
-  </li>
-  
-      <li>
-    <a href="scanme.php"  >ScanMe</a>
+    <a href="contact.php">Contact Details</a>
   </li> 
   
   </ul>
@@ -363,7 +362,7 @@ figure figcaption h2 {
           <figure>
             <img src="https://image.flaticon.com/icons/svg/970/970514.svg" alt="">
             <figcaption>
-              <h4> Amout Details</h4>
+              <h4> Amount Details</h4>
               <h6>Room Number : <?php echo $room ?></h6>
               <h2>Total : &#8377;<?php  echo $TotalAmount ?> </h2>
             </figcaption>

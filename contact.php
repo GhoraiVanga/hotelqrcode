@@ -14,7 +14,7 @@ foreach($qry->fetch_array() as $k => $val){
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - 404 Page</title>
+  <title>Contact</title>
   <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -29,6 +29,20 @@ foreach($qry->fetch_array() as $k => $val){
 
 html,
 body {
+    
+    
+    
+      /*background: linear-gradient(120deg,#2980b9, #8e44ad);  */
+   background-image: url("Images/hotel.jpg");
+background-repeat:no-repeat;
+-webkit-background-size:cover;
+-moz-background-size:cover;
+-o-background-size:cover;
+background-size:cover;
+background-position:center;
+    
+    
+    
   height: 100%;
 }
 
@@ -322,19 +336,18 @@ figure figcaption h2 {
 <nav data-state="closed">
   <ul>
   <li>
-    <a href="trackorder.php">Home</a>
-  </li>
+    <a href="scanme.php"  >Scan QR</a>
+  </li> 
   <li>
-    <a href="totalamount.php" >Total Amount</a>
+    <a href="trackorder.php">Track Order</a>
   </li>
 
+<!--  <li>
+    <a href="totalamount.php">Order Amount</a>
+  </li>     -->
   <li>
-    <a href="contact.php" style="color:white" >Contact</a>
-  </li>
-  
-      <li>
-    <a href="scanme.php" style="color:white" >ScanMe</a>
-  </li>  
+    <a href="contact.php"  style="color:white">Contact Details</a>
+  </li> 
   </ul>
 </nav>
   
@@ -349,7 +362,7 @@ figure figcaption h2 {
            
             <figcaption>
               <div class="room" > <?php echo $name ?></div>
-              <h4><i class="fa fa-mobile" aria-hidden="true"></i> <?php echo $phone ?></h4>
+              <h4><i class="fa fa-phone" aria-hidden="true"></i> <?php echo $phone ?></h4>
               <h6> <i class="fa fa-envelope" aria-hidden="true"></i> <?php echo $email ?></h6>
               <h2> <i class="fa fa-map-marker"></i> <?php  echo $address?></h2>
             </figcaption>

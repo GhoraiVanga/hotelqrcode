@@ -6,7 +6,7 @@
           <div class="col-md-12">
           <div class="card">
               <div class="card-header bg-primary">
-                <h3 class="card-title ">Category: Menu catagory</h3>
+                <h3 class="card-title ">Manage Hotel Details</h3>
                 <?php
 $qry = $conn->query("SELECT COUNT(*) FROM `hotel_info`  ");
 $info= mysqli_fetch_row($qry);
@@ -30,7 +30,7 @@ else {
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="example1" class="table table-bordered table-striped dataTable">
                   <thead>
                   <tr>
                     <th>Hotel Name</th>
@@ -86,15 +86,18 @@ else {
 		$('table').dataTable()
 	})
 	$('#new_hotel').click(function(){
+	    
 		uni_modal("Hotel Info","hotel_info.php",'large')
 		
 	})
 
-	$('.edit_hotel').click(function(){
-		uni_modal("Edit Hotel Information","hotel_info.php?id="+$(this).attr('data-id'),'large')
+//	$('.edit_hotel').click(function(){
+	    $(".dataTable").on('click','.edit_hotel', function () {
+		uni_modal("Edit Hotel Information","hotel_info.php?id="+$(this).attr('data-id'))
 		
 	})
-	$('.delete_hotel').click(function(){
+//	$('.delete_hotel').click(function(){
+	    $(".dataTable").on('click','.delete_hotel', function () {
 		_conf("Are you sure to delete this course?","delete_hotel",[$(this).attr('data-id')])
 	})
 	

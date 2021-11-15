@@ -8,25 +8,16 @@
 		</div> -->
 	</div>
 	<div class="card-body">
-		<div class="container-fluid">
+	
         <div class="container-fluid">
-			<table class="table table-bordered table-stripped">
-				<colgroup>
-					<col width="5%">
-					<col width="15%">
-					<col width="25%">
-					<col width="10%">
-					<col width="10%">
-					<col width="10%">
-					<col width="10%">
-					<col width="15%">
-				</colgroup>
+			<table id="example1" class="table table-bordered table-stripped">
+
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>Date Order</th>
-						<th>Client</th>
-						<th>Room No</th>
+						<th>Date of Order</th>
+						<th>Client Name</th>
+						<th>Room No.</th>
 						<th>Total Amount</th>
 						<th>Order Type</th>
 						<th>Status</th>
@@ -47,7 +38,7 @@
 							<td class="text-right"><?php echo number_format($row['total']) ?></td>
 							<td class="text-center">
                                 <?php if($row['mark'] == 0): ?>
-                                    <span class="badge badge-danger">OLD Order</span>
+                                    <span class="badge badge-danger">Order Fulfilled</span>
                                 <?php else: ?>
                                     <span class="badge badge-success">New Order</span>
                                 <?php endif; ?>
@@ -72,9 +63,9 @@
 				                  </button>
 				                  <div class="dropdown-menu" role="menu">
 				                    <a class="dropdown-item" href="index.php?page=view_order&id=<?php echo $row['id'] ?>">View Order</a>
-									<?php if($row['mark'] == 1 ): ?>
+								<!--	<?php if($row['mark'] == 1 ): ?>
 				                    <a class="dropdown-item mark_order" href="javascript:void(0)"  data-id="<?php echo $row['id'] ?>">Mark as Old Order </a>
-									<?php endif; ?>
+									<?php endif; ?>  -->
 				                    <div class="dropdown-divider"></div>
 				                    <a class="dropdown-item delete_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><span class="fa fa-trash text-danger"></span> Delete</a>
 				                  </div>
@@ -84,7 +75,7 @@
 				</tbody>
 			</table>
 		</div>
-		</div>
+	
 	</div>
 </div>
 
@@ -105,55 +96,7 @@ $total=$rows[0];
 
 
 
-<!-- Sound Notification from Start Here -->
 
-<script>
-    var TOTAL_ORDER = <?=$total?>;
-    setInterval(function()
-    {
-        checkUpdate();
-},3000);
-
-function checkUpdate()
-{
-    $.post("order_process.php", function(data)
-    {
-		var data=jQuery.parseJSON(data);
-       if (data.sound==TOTAL_ORDER)
-       {
-          
-		
-
-       }
-
-       else if (data.sound>=TOTAL_ORDER)
-	   {
-		playSound();
-	   }
-
-
-
-    } );
-}
-
-function playSound()
-{
-	    // get all the order notifications
-		var audioogg = new Audio('Media/call-waiter.mp3');
-    //var audiomp3 = new Audio(siteurl + 'includes/assets/audio/message.mp3');
-    //var callWaiterMp3 = new Audio(siteurl + 'includes/assets/audio/call-waiter.mp3');
-    // var audio = new Audio('http://www.rangde.org/static/bell-ring-01.mp3');
-   //audioogg.play();
-  // audioogg.muted = true; // without this line it's not working although I have "muted" in HTML
-   audioogg.play();
-   Notiflix.Report.Success( 'New Order', 'You Have a New Order', 'Click',  function cb() {
-	location.reload();
-    
-  } ); 
-
-}
-
-</script>
 
 <script>
 	$(document).ready(function(){

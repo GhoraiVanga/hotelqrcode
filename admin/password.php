@@ -5,10 +5,10 @@
   <div class="card card-outline card-primary">
 
     <div class="card-body">
-      <p class="login-box-msg">You are only one step a way from your new password</p>
+      <p class="login-box-msg">Change Admin Password</p>
       <form  action="" id="password-form">
         <div class="input-group mb-3">
-          <input type="password" id="password1" class="form-control" placeholder="Privious password" name="password1">
+          <input type="password" id="password" class="form-control" placeholder="Previous Password" name="password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -17,6 +17,15 @@
         </div>
         <div class="input-group mb-3">
           <input type="password" class="form-control" id="password2" placeholder="New Password" name="password2">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        
+         <div class="input-group mb-3">
+          <input type="password" class="form-control" id="password3" placeholder=" Retype New Password" name="password3">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -43,11 +52,12 @@
      $('#password-form').submit(function(e){
         e.preventDefault()
 
-        var password1 = $('#password1').val();
+        var password = $('#password').val();
         var password2 = $('#password2').val();
+        var password3 = $('#password3').val();
   
         
-        if(password1 == '' || password2 == '' ){
+        if(password == '' || password2 == '' ){
         //notificationme(); 
         //toastr.error("please Fill up");
 
@@ -55,9 +65,16 @@
      return false;
         }
         
-        else if(password1 == password2)
+        else if(password == password2)
         {
-             Notiflix.Report.Failure( 'Equal Password', 'password should be Different', 'Click' ); 
+             Notiflix.Report.Failure( 'Equal Password', 'old Password And New Password Should be Different', 'Click' ); 
+             return false;
+        }
+        
+        
+            else if(password2 != password3)
+        {
+             Notiflix.Report.Failure( 'Equal Password', 'password should be Same', 'Click' ); 
              return false;
         }
         

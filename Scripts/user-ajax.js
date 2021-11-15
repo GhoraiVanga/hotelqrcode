@@ -88,7 +88,6 @@ jQuery(function($) {
     var audiomp3 = new Audio(siteurl + 'includes/assets/audio/message.mp3');
     var callWaiterMp3 = new Audio(siteurl + 'includes/assets/audio/call-waiter.mp3');
 
-    /* Manage new orders */
     function manage_orders(response) {
         if (!jQuery.isEmptyObject(response)) {
             if ($('#qr-orders-table').length) {
@@ -165,7 +164,6 @@ jQuery(function($) {
     alertify.closeLogOnClick(true);
     alertify.delay(20000);
 
-    /* Manage waiter calls */
     function manage_waiter_calls(response) {
         if (!jQuery.isEmptyObject(response)) {
             callWaiterMp3.play();
@@ -181,7 +179,6 @@ jQuery(function($) {
         }
     }
 
-    /* Hearbeat */
     function quick_heartbeat() {
         $.ajax({
             type: "POST",

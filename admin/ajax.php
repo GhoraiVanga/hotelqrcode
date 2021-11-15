@@ -190,13 +190,25 @@ if($action == "forget_password"){
 }
 
 
+//save_roominvoice
+
+
+if($action == "save_roominvoice"){
+	$save = $crud->save_roominvoice();
+	if($save)
+		echo $save;
+}
+
+
+//change_cookpassword
 
 
 
-
-
-
-
+if($action == "change_cookpassword"){
+	$save = $crud->change_cookpassword();
+	if($save)
+		echo $save;
+}
 
 
 

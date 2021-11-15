@@ -2,30 +2,23 @@
 
 <div class="card card-outline card-primary">
 	<div class="card-header">
-		<h3 class="card-title">List of Orders</h3>
+		<h3 class="card-title">List of Rooms</h3>
 		<!-- <div class="card-tools">
 			<a href="?page=order/manage_order" class="btn btn-flat btn-primary"><span class="fas fa-plus"></span>  Create New</a>
 		</div> -->
 	</div>
 	<div class="card-body">
-		<div class="container-fluid">
+		
         <div class="container-fluid">
-			<table class="table table-bordered table-stripped">
-				<colgroup>
-					<col width="5%">
-					<col width="15%">
-					<col width="20%">
-					<col width="20%">
-					<col width="40%">
-			
-				</colgroup>
+		<table id="example1" class="table table-bordered table-stripped dataTable">
+
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>ROOM NO</th>
+						<th>ROOM</th>
 						<th>URL</th>
-                        <th>Link Status</th>
-						<th>Action</th>
+                        <th>STATUS</th>
+						<th>ACTION</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -38,19 +31,19 @@
 							<td class="text-center"><?php echo $i++; ?></td>
 							
 							<td><?php echo $row['room'] ?></td>
-							<td class="text-right"><?php echo $row['url'] ?></td>
+							<td class="text-right"><a href=<?php echo $row['url'] ?> target="_blank">GO</a></td>
 							<td class="text-center">
                                 <?php if($row['status'] == 1): ?>
-                                    <span class="badge  badge-success">Activate</span>
+                                    <span class="badge  badge-success">Active</span>
                                 <?php else: ?>
-                                    <span class="badge badge-danger">Deactivate</span>
+                                    <span class="badge badge-danger">Inactive</span>
                                 <?php endif; ?>
                             </td>
 					
                             <td class="text-center">
-				<button class="btn btn-sm btn-outline-primary view_qr" type="button" data-id="<?php echo $row['id'] ?>" >View</button>
-                <button class="btn btn-sm btn-outline-success update_link" id="update_link" type="button" data-id="<?php echo $row['id'] ?>">Link</button>
-				<button class="btn btn-sm btn-outline-danger delete_qrcode" type="button" data-id="<?php echo $row['id'] ?>">Delete</button>
+				<button class="btn btn-sm btn-outline-success view_qr" type="button" data-id="<?php echo $row['id'] ?>" ><i class="fa fa-eye"></i></button>
+                <button class="btn btn-sm btn-outline-primary update_link" id="update_link" type="button" data-id="<?php echo $row['id'] ?>"><i class="fa fa-edit"></i></button>
+				<button class="btn btn-sm btn-outline-danger delete_qrcode" type="button" data-id="<?php echo $row['id'] ?>"><i class="fa fa-trash"></i></button>
 				</td>
 
 
@@ -63,22 +56,25 @@
 		</div>
 		</div>
 	</div>
-</div>
+
 
 <script>
 	$(document).ready(function(){
 		$('table').dataTable()
 	})
-	$('.update_link').click(function(){
+//	$('.update_link').click(function(){
+$(".dataTable").on('click','.update_link', function () { 
 		uni_modal("update_link","update_link.php?id="+$(this).attr('data-id'))
 		
 	})
 
-	$('.view_qr').click(function(){
-		uni_modal("View Qrcode","view_qr.php?id="+$(this).attr('data-id'),'large')
+//	$('.view_qr').click(function(){
+$(".dataTable").on('click','.view_qr', function () { 
+		uni_modal("View QR Code","view_qr.php?id="+$(this).attr('data-id'),'large')
 		
 	})
-	$('.delete_qrcode').click(function(){
+//	$('.delete_qrcode').click(function(){
+$(".dataTable").on('click','.delete_qrcode', function () { 
 		_conf("Are you sure to delete this QRCODE?","delete_qrcode",[$(this).attr('data-id')])
 	})
 	
@@ -93,7 +89,7 @@
 				if(resp==1){
           //notificationme(); 
           //toastr.success("Data successfully deleted.")
-          Notiflix.Notify.Success('Qrcode successfully deleted');
+          Notiflix.Notify.Success('QR Code successfully deleted');
 				
 					setTimeout(function(){
 						location.reload()

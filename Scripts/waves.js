@@ -1,11 +1,3 @@
-/*!
- * Waves v0.7.5
- * http://fian.my.id/Waves
- *
- * Copyright 2014-2016 Alfiana E. Sibuea and other contributors
- * Released under the MIT license
- * https://github.com/fians/Waves/blob/master/LICENSE
- */
 
 ;(function(window, factory) {
     'use strict';
@@ -190,10 +182,6 @@
         }
     };
 
-    /**
-     * Collection of wrapper for HTML element that only have single tag
-     * like <input> and <img>
-     */
     var TagWrapper = {
 
         // Wrap <input> tag so it can perform the effect
@@ -243,10 +231,6 @@
         }
     };
 
-    /**
-     * Hide the effect and remove the ripple. Must be
-     * a separate function to pass the JSLint...
-     */
     function removeRipple(e, el, ripple) {
 
         // Check if the ripple still exist
@@ -309,15 +293,8 @@
     }
 
 
-    /**
-     * Disable mousedown event for 500ms during and after touch
-     */
     var TouchHandler = {
 
-        /* uses an integer rather than bool so there's no issues with
-         * needing to clear timeouts if another touch event occurred
-         * within the 500ms. Cannot mouseup between touchstart and
-         * touchend, nor in the 500ms after touchend. */
         touches: 0,
 
         allowEvent: function(e) {
@@ -350,10 +327,6 @@
     };
 
 
-    /**
-     * Delegated click handler for .waves-effect element.
-     * returns null when .waves-effect element not in "click tree"
-     */
     function getWavesEffectElement(e) {
 
         if (TouchHandler.allowEvent(e) === false) {
@@ -374,9 +347,6 @@
         return element;
     }
 
-    /**
-     * Bubble the click and show effect if .waves-effect elem was found
-     */
     function showEffect(e) {
 
         // Disable effect if element has "disabled" property on it
@@ -469,11 +439,6 @@
     };
 
 
-    /**
-     * Attach Waves to dynamically loaded inputs, or add .waves-effect and other
-     * waves classes to a set of elements. Set drag to true if the ripple mouseover
-     * or skimming effect should be applied to the elements.
-     */
     Waves.attach = function(elements, classes) {
 
         elements = getWavesElements(elements);
@@ -503,9 +468,6 @@
     };
 
 
-    /**
-     * Cause a ripple to appear in an element via code.
-     */
     Waves.ripple = function(elements, options) {
         elements = getWavesElements(elements);
         var elementsLen = elements.length;
@@ -555,9 +517,7 @@
         }
     };
 
-    /**
-     * Remove all ripples from an element.
-     */
+
     Waves.calm = function(elements) {
         elements = getWavesElements(elements);
         var mouseup = {
@@ -570,9 +530,7 @@
         }
     };
 
-    /**
-     * Deprecated API fallback
-     */
+
     Waves.displayEffect = function(options) {
         console.error('Waves.displayEffect() has been deprecated and will be removed in future version. Please use Waves.init() to initialize Waves effect');
         Waves.init(options);

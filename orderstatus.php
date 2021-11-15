@@ -17,7 +17,7 @@ return 1;
 if($action=='Cancel')
 {
     extract($_POST);
-    $sql="UPDATE `order_details` SET `order_status`='4' ,`timeofdelivery`='$date' WHERE `id`='$id' ";
+    $sql="UPDATE `order_details` SET `order_status`='4' ,`timeofapprove`='$date' , `paid` = '2' WHERE `id`='$id' ";
     $qry = mysqli_query($conn,$sql);
     return 1;
 

@@ -1,11 +1,3 @@
-/************************************************
- * Template Name: QuickQR - Contactless Restaurant QR Menu Maker
- * Version: 1.0
- * Author: BYLANCER
- * Developed By: BYLANCER
- * Author URL: www.bylancer.com
- *************************************************/
-
 (function($) {
     "use strict";
 
@@ -16,7 +8,6 @@
         $view_order_wrapper = $('#view-order-wrapper');
 
 
-    /* PRELOADER */
     $(window).on('load', function() {
         $(".preloading").fadeOut("slow");
         if ($("body").hasClass("my_splash_page")) {
@@ -42,7 +33,6 @@
     });
     $('.menu-category').first().trigger('click');
 
-    /* Check if the order paid */
     let current_url = new URL(window.location.href);
 
     if (current_url.searchParams.get('return') == 'success') {
@@ -66,7 +56,6 @@
         }
     });
 
-    /* SIDE NAVIGATION */
     $('#dismiss, .overlay').on('click', function() {
         $(this).parents('.sidenav').removeClass('active');
         $('#viewOrder').removeClass('active');
@@ -409,9 +398,6 @@
         manageViewOrder();
     });
 
-    /*
-     * Ordering type
-     */
     $("#ordering-type").on("change", function(e) {
         let ordering_type = $(this).val();
         if (ordering_type == 'on-table') {
@@ -427,25 +413,16 @@
             $('#phone-number-field').slideDown();
             $('#address-field').slideDown();
         }
-        /*if($("#pay_via").val() == 'pay_online'){
-            $('#phone-number-field').slideDown();
-        }*/
     }).trigger('change');
 
     if ($("#ordering-type").find('option').length == 1) {
         $("#ordering-type").closest('.section').hide();
     }
 
-    /*
-     * pay via
-     */
     $("#pay_via").on("change", function(e) {
         let pay_via = $(this).val();
         if (pay_via == 'pay_on_counter') {
             $('#submit-order-button').html(LANG_SEND_ORDER);
-            /*if($("#ordering-type").val() == 'on-table'){
-                $('#phone-number-field').slideUp();
-            }*/
 
         } else if (pay_via == 'pay_online') {
             $('#submit-order-button').html(LANG_PAY_NOW);
@@ -453,9 +430,6 @@
         }
     });
 
-    /*
-     * Send Order
-     */
     $("#send-order-form").on("submit", function(e) {
         e.preventDefault();
         var order_data = JSON.parse(localStorage.getItem('quickqr_order')),
@@ -514,9 +488,6 @@
         });
     });
 
-    /*
-     * Call the waiter
-     */
     $("#call-waiter-form").on("submit", function(e) {
         e.preventDefault();
         var $form = $(this),
@@ -540,7 +511,6 @@
         });
     });
 
-    /* on lang change */
     $('.user-lang-switcher').on('click', '.dropdown-menu a', function(e) {
         e.preventDefault();
         var lang = $(this).data('lang');

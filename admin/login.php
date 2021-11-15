@@ -10,10 +10,10 @@ session_start();
 
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title></title>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QRCODE</title>
+ <link rel="icon" href="QRCODE/qrcode.gif" type="image/gif" sizes="16x16">
 <?php 
 if(isset($_SESSION['login_id']))
 header("location:index.php?page=home");
@@ -27,22 +27,32 @@ header("location:index.php?page=home");
 
 <head>
     <meta charset="utf-8">
-    <title>Animated Login Form | CodingNepal</title>
+    <title>Hotel</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
 *{
-  margin: 0;
-  padding: 0;
+
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
 body{
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(120deg,#2980b9, #8e44ad);
+
+  /*background: linear-gradient(120deg,#2980b9, #8e44ad);  */
+   background-image: url("bgimage/klp.jpg");
+background-repeat:no-repeat;
+-webkit-background-size:cover;
+-moz-background-size:cover;
+-o-background-size:cover;
+background-size:cover;
+background-position:center;
+ 
+  height: 100vh;
+  overflow: hidden;
   height: 100vh;
   overflow: hidden;
 }
+
+
 .center{
   position: absolute;
   top: 50%;
@@ -147,17 +157,17 @@ input[type="submit"]:hover{
   </head>
   <body>
     <div class="center">
-      <h1>Login</h1>
+      <h1>Admin Login</h1>
       <form  method="post" id="login-form">
         <div class="txt_field">
           <input type="text" name="username" required>
           <span></span>
-          <label>Username</label>
+          <label></label>
         </div>
         <div class="txt_field">
           <input type="password" name="password" required>
           <span></span>
-          <label>Password</label>
+          <label></label>
         </div>
         <div class="pass"><a href="Forget_Password.php">Forgot Password?</a>  </div>
         <input type="submit" value="Login">

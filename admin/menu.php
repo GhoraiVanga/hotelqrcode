@@ -13,7 +13,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="example1" class="table table-bordered table-striped dataTable">
                   <thead>
                   <tr>
                     <th>Category Name</th>
@@ -40,8 +40,8 @@
                                 <?php endif; ?>
                             </td>
                <td class="text-center">
-				<button class="btn btn-sm btn-outline-primary edit_category" type="button" data-id="<?php echo $row['id'] ?>" >Edit</button>
-				<button class="btn btn-sm btn-outline-danger delete_category" type="button" data-id="<?php echo $row['id'] ?>">Delete</button>
+				<button class="btn btn-sm btn-outline-primary edit_category" type="button" data-id="<?php echo $row['id'] ?>" ><i class="fa fa-edit"></i></button>
+				<button class="btn btn-sm btn-outline-danger delete_category" type="button" data-id="<?php echo $row['id'] ?>"><i class="fa fa-trash"></i></button>
 				</td>
               
             </tr>
@@ -64,15 +64,20 @@
 		$('table').dataTable()
 	})
 	$('#new_category').click(function(){
-		uni_modal("New Category","new_category.php",'large')
+		uni_modal("New Category","new_category.php")
 		
 	})
 
-	$('.edit_category').click(function(){
-		uni_modal("Manage Category","new_category.php?id="+$(this).attr('data-id'),'large')
+$(".dataTable").on('click','.edit_category', function () { 
+
+//	$('.edit_category').click(function(){
+		uni_modal("Manage Category","new_category.php?id="+$(this).attr('data-id'))
 		
 	})
-	$('.delete_category').click(function(){
+	
+//	$('.delete_category').click(function(){
+$(".dataTable").on('click','.delete_category', function () { 	    
+	    
 		_conf("Are you sure to delete this course?","delete_category",[$(this).attr('data-id')])
 	})
 	

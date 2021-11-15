@@ -3,7 +3,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>ScanMe</title>
+  <title>Order Food</title>
   <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -244,20 +244,18 @@ figure figcaption h2 {
 <nav data-state="closed">
   <ul>
   <li>
-    <a href="trackorder.php">Home</a>
-  </li>
+    <a href="scanme.php"  style="color:white" >Scan QR</a>
+  </li> 
   <li>
-    <a href="totalamount.php" >Total Amount</a>
+    <a href="trackorder.php"  >Track Order</a>
   </li>
 
+<!--  <li>
+    <a href="totalamount.php">Order Amount</a>
+  </li>         -->
   <li>
-    <a href="contact.php"  >Contact</a>
-  </li>
-  
-    <li>
-    <a href="scanme.php" style="color:white" >ScanMe</a>
+    <a href="contact.php">Contact Details</a>
   </li> 
-  
   
   </ul>
 </nav>

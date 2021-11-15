@@ -15,7 +15,7 @@ foreach($qry->fetch_array() as $k => $val){
 
         </div>
         <div class="form-group">
-            <label for="" class="control-label">name</label>
+            <label for="" class="control-label">Name</label>
             <input type="text" id="name" class="form-control" name="name"  value="<?php echo isset($name) ? $name :'' ?>" required>
         </div>
 
@@ -23,32 +23,32 @@ foreach($qry->fetch_array() as $k => $val){
 
 
         <div class="form-group">
-            <label for="" class="control-label">tagline</label>
+            <label for="" class="control-label">Tagline</label>
             <input type="text" class="form-control" id="tagline"  name="tagline"  value="<?php echo isset($tagline) ? $tagline :'' ?>" required>
         </div>
         <div class="form-group">
-            <label for="" class="control-label">	address</label>
+            <label for="" class="control-label">	Address</label>
             <input type="text" class="form-control" id="address"  name="address"  value="<?php echo isset($address) ? $address :'' ?>" required>
         </div>
         
         <div class="form-group">
-            <label for="" class="control-label">working_hours</label>
+            <label for="" class="control-label">Working_Hours</label>
             <input type="text" class="form-control" id="working_hours"  name="working_hours"  value="<?php echo isset($working_hours) ? $working_hours :'' ?>" required>
         </div>
 
      <div class="form-group">
-            <label for="" class="control-label">email</label>
+            <label for="" class="control-label">Email-id</label>
             <input type="text" class="form-control" id="email"  name="email"  value="<?php echo isset($email) ? $email :'' ?>" required>
         </div> 
 
         <div class="form-group">
-            <label for="" class="control-label">phone</label>
+            <label for="" class="control-label">Phone No.</label>
             <input type="text" class="form-control" id="phone"  name="phone"  value="<?php echo isset($phone) ? $phone :'' ?>" required>
         </div>
 
 
         <div class="form-group">
-				<label for="" class="control-label">photo</label>
+				<label for="" class="control-label">Image</label>
 				<div class="custom-file">
 	              <input type="file" class="custom-file-input rounded-circle" id="customFile" name="img" multiple accept="image/*" onchange="displayImg(this,$(this))">
 	              <label class="custom-file-label" for="customFile">Choose file</label>

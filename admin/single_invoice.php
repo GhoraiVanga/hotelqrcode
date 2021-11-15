@@ -63,7 +63,7 @@ $min = pow(10, $length - 1) ;
 echo mt_rand($min, $max);   ?></b><br>
                   <br>
                   <b>Order Room No :</b><strong><?php echo $_GET['roomno'] ?></strong><br>
-                  <b>Payment Due:</b> <?php echo date('d-m-Y H:i');  ?><br>
+                 <!-- <b>Payment Due:</b> <?php echo date('d-m-Y H:i');  ?><br>  -->
                 </div>
                 <!-- /.col -->
               </div>

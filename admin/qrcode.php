@@ -45,6 +45,17 @@ if(isset($_POST['submit']) ) {
 }
 ?>
 
+ <?php 
+         $qry = $conn->query("SELECT `base_url` FROM `hotel_info`");
+      foreach($qry->fetch_array() as $k => $val){
+        $$k=$val;
+    }
+    
+        ?>
+
+
+
+
 <div class="row">
           <div class="col-md-6">
             <!-- Box Comment -->
@@ -52,15 +63,11 @@ if(isset($_POST['submit']) ) {
               <div class="card-header">
                 <div class=" user-block d-inline-flex">
                 <i class='fas fa-qrcode' style='font-size:30px;color:red'></i>
-                  <span class="username"><a href="#">QRCODE GENERATE FROM</a></span>
+                  <span class="username"><a href="#">GENERATE YOUR QR-CODE</a></span>
                   
                 </div>
                 <!-- /.user-block -->
                 <div class="card-tools">
-              
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
               
                 </div>
 
@@ -73,7 +80,7 @@ if(isset($_POST['submit']) ) {
 						<input type="number" class="form-control" name="room" style="width:20em;" placeholder="Enter your room no" value="<?php echo @$number; ?>" required />
 					</div>
 					<div class="form-group">
-                   <textarea rows="15" cols="30" type="text" class="form-control" name="link" style="width:20em;" value="https://wekartlab.in/ADDONS/HOTELDEMO/"  readonly>https://wekartlab.in/ADDONS/HOTELDEMO/</textarea>
+                   <textarea rows="5" cols="30" type="text" class="form-control" name="link" style="width:20em;" value="<?php echo $base_url ?>"  readonly><?php echo $base_url ?></textarea>
 					</div>
 					<div class="form-group">
 						<input type="submit" name="submit" class="btn btn-danger submitBtn" style="width:20em; margin:0;" />
@@ -94,7 +101,7 @@ if(isset($_POST['submit']) ) {
               <div class="card-header">
                 <div class="user-block d-inline-flex">
                <i class='fas fa-download' style='font-size:30px;color:red'></i>
-                  <span class="username"><a href="#">DOWNLOAD QRCODE</a></span>
+                  <span class="username"><a style="color: #007bff"> QR-CODE</a></span>
                   
                 </div>
                 <!-- /.user-block -->
@@ -107,27 +114,51 @@ if(isset($_POST['submit']) ) {
                 </div>
                 <!-- /.card-tools -->
               </div>
-
+<style>
+.qr-field {
+  position: absolute;
+  top: 57%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>
     <!-- Card Body -->
-    <div class="card-body">
-
-	<div class="qr-field">
-				<h2 style="text-align:center">QR Code Result: </h2>
-				<center>
-					<div class="qrframe" style="border:2px solid white; width:210px; height:385px;">
-							<?php echo '<img src="QRCODE/'. @$filename.'.png" style="width:200px; height:200px;"><br>'; ?>
-					</div>
-					<a class="btn btn-default submitBtn" style="width:210px; margin:5px 0;" href="download.php?file=<?php echo $filename; ?>.png ">Download QR Code</a>
-				</center>
-			</div>
-
-
+    <div class="card-body wekart">
+        <img src="Media/SCAN.png" alt="Back" style="width:100%;">
+        <div class="qr-field">
+			<center>
+				<div class="qrframe" style="border:2px solid white; width:250px; height:250px;">
+						<?php echo '<img src="QRCODE/'. @$filename.'.png" style="width:220px; height:220px;"><br>'; ?>
+				</div>
+			</center>
+			<h5 style="text-align:center"><b>ROOM NO : <?=$room?></b></h5>
+		</div>
     </div>
+    
+    
+    
+    </div>
+	<center>
+	 <button type="button" class="btn btn-default" onclick="myFunction()">DOWNLOAD QR-CODE</button>  
+	    
+	</center>
 
 
-
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js'></script>
+<script src='https://superal.github.io/canvas2image/canvas2image.js'></script>
             
-            </div>
+ <script >
+ function myFunction() {
+        html2canvas(document.querySelector('.wekart'), {
+            onrendered: function(canvas) {
+                // document.body.appendChild(canvas);
+              return Canvas2Image.saveAsPNG(canvas);
+            }
+        });
+    }
+
+
+</script>           
 
 
 

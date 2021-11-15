@@ -1,0 +1,1 @@
+<center><img src="Media/support.png" width="100%" height="650px"></center>

@@ -1,27 +1,9 @@
 <?php include('db_connect.php');?>
 <div class="row">
+          
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                  <?php
-                  $total = $conn->query("SELECT COUNT('id') as `total` from `order_details`  ")->fetch_object()->total; 
-                  
-                  ?>
-                <h3><?php echo $total ?></h3>
-
-                <p>Total Order</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-              </div>
-              <a href="index.php?page=order" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
+            <div class="small-box bg-primary">
               <div class="inner">
                        <?php
                   $Revenue = $conn->query("SELECT sum(`total`) as `Revenue` from `order_details` where paid='1' ")->fetch_object()->Revenue; 
@@ -43,7 +25,7 @@
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="index.php?page=order" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -60,7 +42,7 @@
                   
                 <h3><?php echo $Room; ?></h3>
 
-                <p>Total Room</p>
+                <p>No. of Rooms</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person-add"></i>
@@ -71,7 +53,7 @@
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-danger">
+            <div class="small-box bg-success">
               <div class="inner">
                   
                               <?php
@@ -81,7 +63,7 @@
                   
                 <h3><?php  echo $active  ?></h3>
 
-                <p>Active Room Link</p>
+                <p>No. of Available Rooms</p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
@@ -90,12 +72,9 @@
             </div>
           </div>
           <!-- ./col -->
-        </div>
-        
-        <div class="row">
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-info">
+            <div class="small-box bg-danger">
               <div class="inner">
                   
                                     <?php
@@ -105,12 +84,35 @@
                   
                 <h3><?php  echo $deactive  ?></h3>
 
-                <p>Deactive Room Link</p>
+                <p>No. of Unavailable Rooms</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
               <a href="index.php?page=viewcode" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+    
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                  <?php
+                  $total = $conn->query("SELECT COUNT('id') as `total` from `order_details`  ")->fetch_object()->total; 
+                  
+                  ?>
+                <h3><?php echo $total ?></h3>
+
+                <p>Order Details</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+              <a href="index.php?page=order" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -125,7 +127,7 @@
                   
                 <h3><?php echo $Factive  ?></h3>
 
-                <p>Activate Food Category</p>
+                <p> Food Category</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
@@ -136,27 +138,7 @@
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-warning">
-              <div class="inner">
-                  
-                                              <?php
-                   $FDactive = $conn->query("SELECT count(`id`) as 'FDactive' from  `food_category` where `status`='0' ")->fetch_object()->FDactive; 
-                  
-                  ?> 
-                <h3><?php  echo $FDactive;  ?></h3>
-
-                <p>Deactive Food  Catagory</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-              <a href="index.php?page=menu" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
+            <div class="small-box bg-dark">
               <div class="inner">
                 <?php
                    $fooditems = $conn->query("SELECT count(`id`) as 'fooditems' from  `food_items`  ")->fetch_object()->fooditems; 
@@ -165,7 +147,7 @@
                   
                 <h3><?php echo $fooditems; ?></h3>
 
-                <p>Number Of Food Item </p>
+                <p>No. of Food Items </p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
@@ -174,13 +156,34 @@
             </div>
           </div>
           <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                  
+                         <?php
+                   $FDactive = $conn->query("SELECT count(`id`) as 'FDactive' from  `food_items` where `available`='0' ")->fetch_object()->FDactive; 
+                  
+                  ?> 
+                <h3><?php  echo $FDactive;  ?></h3>
+
+                <p>No. of Unavailable Food Items</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-person-add"></i>
+              </div>
+              <a href="index.php?page=menu" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          
         </div>
               <!-- TO DO List -->
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">
                   <i class="ion ion-clipboard mr-1"></i>
-                 Lattest Order
+                 Latest Order
                 </h3>
 
              
@@ -189,6 +192,15 @@
               <div class="card-body" style="padding:0px">
      
                 <table  class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Sl. No.</th>
+                    <th>Room No.</th>
+                    <th>Date & Time</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                  </thead>
                
                   <tbody>
       	<?php 
@@ -201,11 +213,11 @@
                       <i class="fas fa-ellipsis-v"></i>
                       <i class="fas fa-ellipsis-v"></i>
                     </span></td>
-                <td> <span class="text"> Room No : <?php echo $row['roomno'] ?></span></td>
-                <td class="text-center">
+                <td class="text-left"> <span class="text"> Room No. : <?php echo $row['roomno'] ?></span></td>
+                <td class="text-left">
                     <small class="badge badge-danger"><i class="far fa-clock"></i> <?php echo date("Y-m-d H:i",strtotime($row['timeoforder'])) ?></small> 
-                            </td>
-               <td class="text-center">
+                </td>
+                <td class="text-left">
 				<small ><?php if($row['order_status'] == 0): ?>
                                     <span class="badge badge-light">Pending</span>
                                 <?php elseif($row['order_status'] == 1): ?>
@@ -220,7 +232,7 @@
 				</td>
 				
 				
-				   <td>  <a href="index.php?page=view_order&id=<?php  echo $row[id] ?>"          <i class="fas fa-eye"></i>  </a></td>
+				   <td class="text-left">  <a href="index.php?page=view_order&id=<?php  echo $row[id] ?>"          <i class="fas fa-eye"></i>  </a></td>
 				
               
             </tr>

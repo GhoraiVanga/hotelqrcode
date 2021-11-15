@@ -2,11 +2,19 @@
 ob_start();
 include"include/link.php";
 session_start();
+    $string = $_GET['room'];
+    $_SESSION['string']=$string;
+    $encrypt_method = "AES-256-CBC";
+    $secret_key = 'SUMANGHORAI'; // user define private key
+    $secret_iv = 's1f4r8p9'; // user define secret key
+    $key = hash('sha256', $secret_key);
+    $iv = substr(hash('sha256', $secret_iv), 0, 16); // sha256 is hash_hmac_algo    
+    $decrypted = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
 //$_SESSION['mobile']=$_GET['mobile'];
 if (!isset($_SESSION['room']) || $_SESSION['room'] == '')
-$_SESSION['room']=$_GET['room'];
+$_SESSION['room']=$decrypted;
 
-$qry = $conn->query("SELECT name FROM `hotel_info`");
+$qry = $conn->query("SELECT * FROM `hotel_info`");
 foreach($qry->fetch_array() as $k => $val){
         $$k=$val;
     }
@@ -20,6 +28,15 @@ foreach($qry->fetch_array() as $k => $val){
 <head>
   <meta charset="UTF-8">
   <title>Track Order</title>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QRCODE</title>
+ <link rel="icon" href="admin/QRCODE/qrcode.gif" type="image/gif" sizes="16x16">
+  
+  
+  
+  
 <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
@@ -37,47 +54,16 @@ if(empty($_SESSION['room']))
 <script>
   $(document).ready(function(){
  
- $.confirm({
-    title: 'Prompt!',
-    content: '' +
-    '<form action="trackorder.php" class="formName">' +
-    '<div class="form-group">' +
-    '<label>Enter something here</label>' +
-    '<input type="number" placeholder="Your Room Number" class="room form-control" required />' +
-    '</div>' +
-    
-    '</form>',
-    buttons: {
-        formSubmit: {
-            text: 'Submit',
-            btnClass: 'btn-blue',
-            action: function () {
-                //var value = this.$content.find('.name').val().length;
-                var room = this.$content.find('.room').val();
-                if(!room){
-                    $.alert('provide a room number');
-                    return false;
-                }
-               
-                $.alert('Your room Number is  ' + room);
-                window.location = "trackorder.php?room=" + room;
-            }
-        },
-        cancel: function () {
-            window.location = "trackorder.php";
-        },
-    },
-    onContentReady: function () {
-        // bind to events
-        var jc = this;
-        this.$content.find('form').on('submit', function (e) {
-            // if the user submits the form by pressing enter in the field.
-            e.preventDefault();
-            jc.$$formSubmit.trigger('click'); // reference the button and click it
-        });
+$.dialog({
+     icon: 'fa fa-warning',
+    title: 'LOST!',
+    content: ' Kindly Scan QR Code',
+    draggable: true,
+    type: 'red',
+	  closeIcon: function(){
+     window.location = "scanme.php";
     }
 });
- 
  
  
   });
@@ -235,7 +221,7 @@ nav[data-state=open] ul li:nth-child(4) {
 }
 
 .btn {
-  z-index: 1;
+  z-index: 0;
   overflow: hidden;
   background: transparent;
   position: relative;
@@ -433,41 +419,79 @@ nav[data-state=open] ul li:nth-child(4) {
 </div>
 <nav data-state="closed">
   <ul>
-  <li>
-    <a href="trackorder.php"  style="color:white">Home</a>
-  </li>
-
-  <li>
-    <a href="totalamount.php">Total Amount</a>
-  </li>
-  <li>
-    <a href="contact.php">Contact</a>
-  </li>
   
-      <li>
-    <a href="scanme.php"  >ScanMe</a>
+  <li>
+    <a href="scanme.php"  >Scan QR</a>
   </li> 
+  <li>
+    <a href="trackorder.php"  style="color:white">Track Order</a>
+  </li>
+<!--  <li>
+    <a href="totalamount.php">Order Amount</a>
+  </li>     -->
+  <li>
+    <a href="contact.php">Contact Details</a>
+  </li>
   
   </ul>
 </nav>
 <main>
-
+<?php 
+        $room= $_SESSION['room'];
+        $cc=0;
+        $olist = $conn->query("SELECT * FROM `order_details` WHERE `roomno`= '$room'  AND `paid`='0' ");
+        while($row=$olist->fetch_assoc())
+        {
+            $total=$total+$row['total'];
+            $cc++;
+        }
+?>
   
   <div class="container">
-    <div class="room" ><i class='fa fa-home'></i>Room No: <?php echo $_SESSION['room']  ?></div> 
+    <div class="room" >
+        <i class='fa fa-home'></i>Room No: <?php echo $_SESSION['room']  ?><br>
+         Total Orders: <?php echo $cc  ?><br>
+        Order Amount: <?php echo $total  ?><br>
+        
+        
+        <a href="<?=$base_url?>?room_no=<?=$_SESSION['string'];?>" >
+        <button type="button" class="btn btn-outline-primary">Order More Items</button> </a> 
+    </div>
+    <!-- URL CHANGE --->
+    <style>
+    
+    .room{
+            
+    margin: 0em 0em 1.5em 0em;
+    border: 1px solid powderblue;
+    width: 100%;
+    }
+    
+    
+</style>
+
+        
+ 
+    
+    
     
 
 
   <?php 
 	$i = 0;
 $room=	  $_SESSION['room'];
-		$course = $conn->query("SELECT * FROM `order_details` WHERE `roomno`= '$room'  AND `paid`='0' ");
+		$course = $conn->query("SELECT * FROM `order_details` WHERE `roomno`= '$room'  AND (`paid`='0' OR `paid`='2') ORDER BY `id` DESC ");
 		while($row=$course->fetch_assoc()):
 		 $i++;
+		 
+		 $date=current(explode(" ",$row[timeoforder]));
+		 $time=end(explode(" ",$row[timeoforder]));
 	?>
     
     
-<div>Order ID :  <?php echo $i ?>  <span class="badge badge-success" data-id="<?php echo $row[id] ?>"  > Click Me</span> </div> 
+<div>Order ID :  <?php echo $row[id] ?> </div>
+<div>Date :  <?=$date?> </div>
+<div>Amount : <?=$row[total]?> <span class="badge badge-success" data-id="<?php echo $row[id] ?>"  > Details </span> </div> 
     <div class="row">
 
         <div class="align-self-center col-md-12 hh-grayBox ">
@@ -482,7 +506,7 @@ $room=	  $_SESSION['room'];
              <?php else: ?>
               <div class="order-tracking completed">
               <span class="is-complete"></span>
-              <p>Ordered<br><span><?php echo $row['timeoforder']?> </span></p>
+              <p>Order Placed<br><span><?php echo $time?> </span></p>
             </div>
              <?php endif; ?>
              
@@ -491,34 +515,34 @@ $room=	  $_SESSION['room'];
              <?php if($row['timeofapprove'] == ''){ ?>
             <div class="order-tracking ">
               <span class="is-complete"></span>
-              <p>Waiting<br><span></span></p>
+              <p>Awaiting<br><span></span></p>
             </div>
               <?php } elseif($row['order_status'] == '2' || $row['order_status'] == '1' || $row['order_status'] == '3' ){ ?>
                   <div class="order-tracking completed">
               <span class="is-complete"></span>
-              <p>Approve<br><span><?php echo $row['timeofapprove']?></span></p>
+              <p>In Kitchen<br><span><?php echo end(explode(" ",$row['timeofapprove']));?></span></p>
             </div>
              <?php } elseif($row['order_status'] == '4'){ ?>
             
             
             <div class="order-tracking completed">
               <span class="is-complete"></span>
-              <p>Reject<br><span><?php echo $row['timeofapprove']?></span></p>
+              <p>Order Cancelled<br><span><?php echo  end(explode(" ",$row['timeofapprove']))?></span></p>
             </div>
-            
-            
             <?php } ?>
+            
+            
              <!-- time of Delevired -->
               <?php if($row['timeofdelivery'] == ''): ?>
             <div class="order-tracking">
               <span class="is-complete"></span>
-              <p>Waiting<br><span> </span></p>
+              <p>En Route<br><span> </span></p>
             </div>
              <?php else: ?>
                  <div class="order-tracking completed">
               <span class="is-complete"></span>
              <!-- <p>Delivered<br><span>Fri, June 28</span></p> -->
-             <p>Delivered<br><span><?php echo $row['timeofdelivery']?></span></p> 
+             <p>Delivered<br><span><?php echo  end(explode(" ",$row['timeofdelivery']))?></span></p> 
             </div>
              <?php endif; ?>
              
@@ -561,12 +585,12 @@ burger.addEventListener('click', e => {
  <script>
 $('.badge').on('touchstart', function(e) {  
     $.confirm({
-    title: 'Your Order ',
+    title: 'Your Order Details ',
  
     content: 'url:order.php?id='+$(this).attr('data-id'),
     onContentReady: function () {
         var self = this;
-        this.setContentPrepend('<div>all ordering item</div>');
+        this.setContentPrepend('<div>  </div>');
         setTimeout(function () {
             self.setContentAppend('<div>Thanks For Your Order</div>');
         }, 2000);
